@@ -1,20 +1,104 @@
 <!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to {{ title }}!
-  </h1>
-  <img width="300" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
+<div class="container">
+  <div class="headerSection">
+    <h1>CURD Operations</h1>
+  </div>
+  <form [formGroup]=Form>
+    <div class="row">
+      <div class="col-md-2">
+        <input type="text" formControlName="Name" placeholder="Name">
+      </div>
+      <div class="col-md-2">
+        <input type="text" formControlName="Age" placeholder="Age">
+      </div>
+      <div class="col-md-2">
+        <input type="email" formControlName="Email" placeholder="Email">
+      </div>
+      <div class="col-md-2">
+        <input type="text" bsDatepicker formControlName="DOB" placeholder="Date of Birth" >
+      </div>
+      <div class="col-md-2">
+        <input type="text" formControlName="Credit" placeholder="Credit">
+      </div>
+      <div class="col-xs-2">
+        <div class="row" style="padding-left:0%; padding-right:0%">
+          <div class="col-md-6">
+            <button *ngIf="buttonType === 'Submit'" type="button" mat-raised-button color="accent" (click)="Submit()" (keyup.enter)="Submit()">add</button>
+            <button *ngIf="buttonType === 'Done'" type="button" mat-raised-button color="primary" (click)="Reset()">Reset</button>
+          </div>
+          <div class="col-md-6">
+            <button *ngIf="buttonType === 'Done'" type="button" mat-raised-button color="basic" (click)="Done()" (keyup.enter)="Done()">Done</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-2">
+        <p class="error" *ngIf="Form.controls['Name'].errors && Form.controls['Name'].touched">
+          <span *ngIf="Form.controls['Name'].errors.required">Name is required</span>
+          <span *ngIf="Form.controls['Name'].errors.pattern">Numbers are not allowed</span>
+        </p>
+      </div>
+      <div class="col-md-2">
+        <p class="error" *ngIf="Form.controls['Age'].errors && Form.controls['Age'].touched">
+          <span *ngIf="Form.controls['Age'].errors.required">Age is required</span>
+          <span *ngIf="Form.controls['Age'].errors.min">Age should be above 18</span>
+          <span *ngIf="Form.controls['Age'].errors.max">Age should be below 100</span>
+        </p>
+      </div>
+      <div class="col-md-2">
+        <p class="error" *ngIf="Form.controls['Email'].errors && Form.controls['Email'].touched">
+          <span *ngIf="Form.controls['Email'].errors.required">Email is required</span>
+          <span *ngIf="Form.controls['Email'].errors.email">Invalid email</span>
+        </p>
+      </div>
+      <div class="col-md-2">
+        <p class="error" *ngIf="Form.controls['DOB'].errors && Form.controls['DOB'].touched">
+          <span *ngIf="Form.controls['DOB'].errors.required">DOB is required</span>
+        </p>
+      </div>
+      <div class="col-md-2">
+        <p>(Optional)</p>
+      </div>
+      <div class="col-md-2">
+      </div>
+    </div>
+
+
+
+  </form>
 </div>
-<h2>Here are some links to help you start: </h2>
-<ul>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://github.com/angular/angular-cli/wiki">CLI Documentation</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
-  </li>
-</ul>
+
+<div class="container">
+  <h3>Output Table:</h3>
+  <div class="row">
+    <div class="col-md-12">
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>S.no</th>
+            <th>Name</th>
+            <th>Age</th>
+            <th>Date of Birth</th>
+            <th>Email ID</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let list of _List;let i = index">
+            <td>{{ i + 1 }}</td>
+            <td>{{ list['Name'] }}</td>
+            <td>{{ list['Age'] }}</td>
+            <td>{{ list['DOB'] | date}}</td>
+            <td>{{ list['Email'] }}</td>
+            <td>
+              <button type="button" mat-raised-button color="warn" (click)="Delete(i)">Delete</button>
+              <button type="button" mat-raised-button (click)="update(i)">update</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
 

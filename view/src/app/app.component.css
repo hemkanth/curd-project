@@ -1,0 +1,24 @@
+.headerSection, th, td {
+    text-align: center;
+}
+form {
+    margin: 0% 5% 3% 5%;
+}
+button {
+    border-radius: 20px;
+    margin: 1% 1% 1% 1%;
+}
+.error {
+    color: tomato;   
+}
+.my-modal {
+    border: solid 4px blue;
+  }
+  
+  .my-modal .modal-header {
+    background-color: lime;
+  }
+  
+  .my-modal .modal-body {
+    background-color: orange;
+  }

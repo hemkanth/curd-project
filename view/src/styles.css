@@ -1,2 +1,34 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+body {
+    background-image: url("./assets/bgimg.jpg");
+    background-repeat: no-repeat;
+    width: 100%;
+    height: 100%;
+    position: relative;
+    color: #ffffff;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+input {
+    background-color: transparent;
+    border-radius: 20px;
+    width: 100%;
+    outline: none !important;
+    padding: 5px 1px 5px 12px;
+}
+::placeholder {
+    color: #ffffff;
+}
+
+.my-modal {
+  border: none;
+}
+
+.my-modal .modal-header {
+  background-color: rgba(0, 0, 0, 0.288);
+}
+
+.my-modal .modal-body {
+  background-color: rgb(61, 61, 61);
+}
